@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+var findup = require('findup-sync');
+var resolve = require('resolve').sync;
+
+var basedir = process.cwd();
+var huttPath;
+
+try {
+  huttPath = resolve('hutt', {basedir: basedir});
+} catch (ex) {
+  huttPath = findup('lib/hutt.js');
+  // No hutt install found!
+  if (!huttPath) {
+    console.log('Unable to find local hutt.', 99);
+  }
+}
+
+var cli = require('../lib/cli')
+// Everything looks good. Require local grunt and run it.
+cli(require(huttPath).Hutt);
+
