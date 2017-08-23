@@ -7,6 +7,7 @@ babel( {
 
 task( 'print', { dependsOn: ['build'] }, () => {
   do$( () => {
+    console.log('from print!')
   } )
 } )
 
